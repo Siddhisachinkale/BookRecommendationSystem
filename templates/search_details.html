@@ -1,0 +1,140 @@
+<!-- search_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+    <!-- Include Bootstrap for consistent styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <style>
+    /* Reset default styles */
+body, h1, p, a {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set background color and text color */
+body {
+    background-color: black;
+    color: #fff; /* White text color */
+    font-family: Arial, sans-serif; /* Choose your preferred font */
+}
+
+/* Navbar styles */
+.navbar {
+      background-color: rgba(255, 255, 255, 0.8); /* Navbar background color with opacity */
+    color: #333; /* Navbar text color */
+    padding: 10px 0;.navbar-brand {
+    font-size: 24px; /* Navbar brand font size */
+}
+
+.navbar a {
+    color: #333; /* Navbar links text color */
+    margin: 0 10px;
+    text-decoration: none;
+}
+/* Container style */
+.container {
+    margin: 0 auto; /* Center the container */
+}
+
+/* Page title style */
+h1 {
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+/* Card style */
+.card {
+    margin-top: 50px;
+    background-color: #222; /* Choose a darker color for cards */
+    color: #fff; /* White text color in cards */
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Card image style */
+.card-img-top {
+    max-width: 100%;
+}
+
+/* Text color for card elements */
+.text-white {
+    color: #fff;
+}
+.header {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.header h1 {
+    font-size: 36px;
+}
+
+.header p {
+    font-size: 18px;
+}
+</style>
+</head>
+<body style="background-color: black">
+
+<nav class="navbar">
+    <a class="navbar-brand">My Book Recommender</a>
+    <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/recommend">Recommend</a></li>
+        <li><a href="/popular">Popular</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="{{ url_for('book_reviews', isbn=book['ISBN']) }}">This book Review </a></li>
+        {% if 'user_id' in session %}
+        <li><a href="/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!-- Book details template with the review form -->
+<div class="container">
+    <h1 class="text-white" style="font-size: 50px; margin-top: 50px;">Book Details</h1>
+
+    <div class="col-md-4" style="margin-top: 50px;">
+        <div class="card">
+            <div class="card-body">
+                <img class="card-img-top" src="{{ book['Image-URL-M'] }}">
+                <p class="text-white">{{ book['Book-Title'] }}</p>
+                <h4 class="text-white">{{ book['Book-Author'] }}</h4>
+                <!-- Display existing reviews -->
+                <!-- Display existing reviews -->
+<h2 class="text-white">Reviews</h2>
+
+<!-- Review submission form -->
+<form method="post" action="{{ url_for('submit_review', isbn=book['ISBN']) }}">
+    <div class="form-group">
+        <label for="rating">Rating:</label>
+        <select class="form-control" name="rating" id="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="review">Review:</label>
+        <textarea class="form-control" name="review" id="review" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!-- search_results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {% for book in results %}
+        <li>
+            <a href="{{ url_for('book_details', isbn=book['ISBN']) }}">
+                {{ book['Book-Title'] }} by {{ book['Book-Author'] }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

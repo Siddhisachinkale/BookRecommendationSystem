@@ -1,0 +1,102 @@
+<!-- book_reviews.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Reviews</title>
+    <!-- Add your head content here -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        /* Reset default styles */
+        body, h1, p, a {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Set background color and text color */
+        body {
+            background-color: black;
+            color: #fff; /* White text color */
+            font-family: Arial, sans-serif; /* Choose your preferred font */
+        }
+
+        /* Navbar styles */
+.navbar {
+      background-color: rgba(255, 255, 255, 0.8); /* Navbar background color with opacity */
+    color: #333; /* Navbar text color */
+    padding: 10px 0;.navbar-brand {
+    font-size: 24px; /* Navbar brand font size */
+}
+
+.navbar a {
+    color: #333; /* Navbar links text color */
+    margin: 0 10px;
+    text-decoration: none;
+}
+/* Container style */
+.container {
+    margin: 0 auto; /* Center the container */
+}
+
+        /* Page title style */
+        h1 {
+            font-size: 50px;
+            margin-top: 50px;
+        }
+
+        /* Card style for reviews */
+        .card {
+            margin-top: 20px;
+            background-color: #222; /* Choose a darker color for cards */
+            color: #fff; /* White text color in cards */
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Text color for card elements */
+        .text-white {
+            color: #fff;
+        }
+    </style>
+</head>
+
+
+<body>
+    <nav class="navbar" >
+        <a class="navbar-brand">My Book recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a href="/popular">Popular</a></li>
+            <li><a href="/search">Search</a></li>
+
+             {% if 'user_id' in session %}
+            <li><a href="/logout">Logout</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+
+
+    <div class="container">
+        <h1 class="text-white" style="font-size: 50px; margin-top: 50px;">{{ book_title }}</h1>
+
+        {% if reviews %}
+        <div class="col-md-4" style="margin-top: 20px;">
+            {% for review in reviews %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-white">Rating: {{ review.rating }}</h3>
+                    <p class="text-white">Review: {{ review.comment }}</p>
+                    <p class="text-white">Username: {{ review.username }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-white">No reviews found for this book.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
